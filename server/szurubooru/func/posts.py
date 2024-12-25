@@ -244,6 +244,9 @@ class PostSerializer(serialization.BaseSerializer):
         return get_post_content_url(self.post)
 
     def serialize_thumbnail_url(self) -> Any:
+        contentUrl = get_post_content_url(self.post)
+        if(contentUrl.split(".")[-1] not in {"webm", "mp4"}):
+            return contentUrl
         return get_post_thumbnail_url(self.post)
 
     def serialize_flags(self) -> Any:
